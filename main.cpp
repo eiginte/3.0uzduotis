@@ -12,6 +12,9 @@ using std::vector;
 using std::setw;
 using std::left;
 using std::right;
+using std::setprecision;
+using std::fixed;
+
 
 struct Studentas {
     string vard;
@@ -30,8 +33,9 @@ int main() {
         Grupe.push_back(ivesk());
     }
 
+    cout << left << setw(15) << "Vardas:" << " | " << setw(20) <<"Pavarde" << " | "<< setw(10) << "Vidurkis:" << endl;
     for (auto temp : Grupe)
-        cout << temp.vard << "  |  " << temp.pav << "  |  " << temp.rez << endl;
+        cout << left << setw(15) << temp.vard << " | "<< setw(20) << temp.pav << " | "<< setw(10) << fixed << setprecision(2) << temp.rez << endl;
 }
 
 
