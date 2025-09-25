@@ -83,7 +83,7 @@ vector<Studentas> skaitymas(const string& filename) {
 }
 
 int main() {
-    string failo_vardas = "randvardai.txt";
+    string failo_vardas = "studentai1000000.txt";
     vector<Studentas> Grupe = skaitymas(failo_vardas);
 
     if(Grupe.empty()){
@@ -107,23 +107,24 @@ int main() {
 
     cout << left << setw(15) << "Vardas:" << " | " << setw(20) << "Pavarde" << " | ";
     if (pasirinkimas == 1)
-        cout << "Vidurkis: ";
+        cout << setw(10)<< "Vidurkis: ";
     else if (pasirinkimas == 2)
-        cout << "Mediana: ";
+        cout << setw(10) << "Mediana: ";
     else
-        cout << "Vidurkis|Mediana";
+        cout << setw(10) << "Vidurkis" << " | " << setw(10) << "Mediana";
     cout << endl;
+    cout << string(70, '-') << endl;
 
     int kiek = 0;
     for (auto temp : Grupe) {
 
         cout << left << setw(15) << temp.vard << " | " << setw(20) << temp.pav << " | ";
         if (pasirinkimas == 1)
-            cout << fixed << setprecision(2) << temp.vid;
+            cout << setw(10) << fixed << setprecision(2) << temp.vid;
         else if (pasirinkimas == 2)
-            cout << fixed << setprecision(2) << temp.med;
+            cout << setw(10) << fixed << setprecision(2) << temp.med;
         else
-            cout << fixed << setprecision(2) << temp.vid << " | " << fixed << setprecision(2) << temp.med;
+            cout << setw(10) << fixed << setprecision(2) << temp.vid << " | " << setw(10) << fixed << setprecision(2) << temp.med;
 
 
         cout << endl;
