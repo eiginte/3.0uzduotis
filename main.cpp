@@ -1,10 +1,10 @@
-
 #include <iostream>
 #include <iomanip>
 #include <vector>
 #include <string>
 #include <algorithm>
 #include <fstream>
+#include <sstream>
 
 using std::cout;
 using std::cin;
@@ -17,6 +17,8 @@ using std::right;
 using std::setprecision;
 using std::fixed;
 using std::ifstream;
+using std::istringstream;
+
 
 
 
@@ -40,40 +42,48 @@ vector<Studentas> skaitymas(const string& filename) {
         return Grupe;
     }
 
-string vard, pav;
-while (failas >> vard >> pav) {
-    Studentas s;
-    s.vard = vard;
-    s.pav = pav;
-    int pazymys;
-    s.paz.clear();
+    string header;
+    getline(failas, header);
 
+    string eilute;
+    while (getline(failas, eilute)) {
+        if (eilute.empty()) continue;
 
-vector<int> nd_paz;
-for (int i = 0; i < 5; i++) {
-    failas >> pazymys;
-    nd_paz.push_back(pazymys);
+        istringstream iss(eilute);
+        Studentas s;
+        iss >> s.vard >> s.pav;
+
+        vector<int> visiPaz;
+        int sk;
+        while (iss >> sk) {
+            visiPaz.push_back(sk);
+        }
+
+        if (visiPaz.empty()) continue;
+
+        s.egzas = visiPaz.back();
+        visiPaz.pop_back();
+
+        s.paz = visiPaz;
+
+        if (!s.paz.empty()) {
+            int sum = 0;
+            for (int x : s.paz) sum += x;
+            s.vid = s.egzas * 0.6 + (double)sum / s.paz.size() * 0.4;
+            s.med = s.egzas * 0.6 + sk_med(s.paz) * 0.4;
+        } else {
+            s.vid = s.egzas * 0.6;
+            s.med = s.egzas * 0.6;
+        }
+
+        Grupe.push_back(s);
+    }
+
+    return Grupe;
 }
-s.paz = nd_paz;
-
-failas >> s.egzas;
-
-int sum = 0;
-for (int x : s.paz) sum += x;
-s.vid = s.egzas * 0.6 + double(sum) / double(s.paz.size()) * 0.4;
-s.med = s.egzas * 0.6 + sk_med(s.paz) * 0.4;
-
-Grupe.push_back(s);
-
-}
-
-return Grupe;
-}
-
-
 
 int main() {
-    string failo_vardas = "kursiokai.txt";
+    string failo_vardas = "studentai10000.txt";
     vector<Studentas> Grupe = skaitymas(failo_vardas);
 
     if(Grupe.empty()){
@@ -90,10 +100,10 @@ int main() {
     cout << "Pasirinkite:" << endl;
     int pasirinkimas;
     cin >> pasirinkimas;
-   
 
 
-    cout << left << setw(15) << "Vardas:" << " | " << setw(20) << "Pavarde" << " | "; 
+
+    cout << left << setw(15) << "Vardas:" << " | " << setw(20) << "Pavarde" << " | ";
     if (pasirinkimas == 1)
         cout << "Vidurkis: ";
     else if (pasirinkimas == 2)
@@ -102,6 +112,7 @@ int main() {
         cout << "Vidurkis|Mediana";
     cout << endl;
 
+    int kiek = 0;
     for (auto temp : Grupe) {
 
         cout << left << setw(15) << temp.vard << " | " << setw(20) << temp.pav << " | ";
@@ -111,8 +122,10 @@ int main() {
             cout << fixed << setprecision(2) << temp.med;
         else
             cout << fixed << setprecision(2) << temp.vid << " | " << fixed << setprecision(2) << temp.med;
-        
+
+
         cout << endl;
+        if (++kiek == 20) break;
     }
 }
 
@@ -159,5 +172,3 @@ double sk_med(vector<int> paz) {
     else
         return paz[dydis / 2];
 }
-
-
