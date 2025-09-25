@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <fstream>
 
 using std::cout;
 using std::cin;
@@ -15,6 +16,8 @@ using std::left;
 using std::right;
 using std::setprecision;
 using std::fixed;
+using std::ifstream;
+
 
 
 struct Studentas {
@@ -26,16 +29,58 @@ struct Studentas {
     double med;
 };
 
-Studentas ivesk();
+
 double sk_med(vector<int> paz);
+
+vector<Studentas> skaitymas(const string& filename) {
+    vector<Studentas> Grupe;
+    ifstream failas(filename);
+    if (!failas) {
+        cout << "Nepavyko atidaryti failo: " << filename << endl;
+        return Grupe;
+    }
+
+string vard, pav;
+while (failas >> vard >> pav) {
+    Studentas s;
+    s.vard = vard;
+    s.pav = pav;
+    int pazymys;
+    s.paz.clear();
+
+
+vector<int> nd_paz;
+for (int i = 0; i < 5; i++) {
+    failas >> pazymys;
+    nd_paz.push_back(pazymys);
+}
+s.paz = nd_paz;
+
+failas >> s.egzas;
+
+int sum = 0;
+for (int x : s.paz) sum += x;
+s.vid = s.egzas * 0.6 + double(sum) / double(s.paz.size()) * 0.4;
+s.med = s.egzas * 0.6 + sk_med(s.paz) * 0.4;
+
+Grupe.push_back(s);
+
+}
+
+return Grupe;
+}
+
 
 
 int main() {
-    vector<Studentas> Grupe;
-    for (int j = 0; j < 3; j++) {
-        cout << "Iveskite " << j + 1 << " studenta:\n";
-        Grupe.push_back(ivesk());
+    string failo_vardas = "kursiokai.txt";
+    vector<Studentas> Grupe = skaitymas(failo_vardas);
+
+    if(Grupe.empty()){
+        cout << "Tuscias failas arba klaida" << endl;
+        return 1;
     }
+
 
 
     cout << "Ka norite isvesti?" << endl;
@@ -114,3 +159,5 @@ double sk_med(vector<int> paz) {
     else
         return paz[dydis / 2];
 }
+
+
