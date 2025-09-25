@@ -83,7 +83,7 @@ vector<Studentas> skaitymas(const string& filename) {
 }
 
 int main() {
-    string failo_vardas = "studentai10000.txt";
+    string failo_vardas = "randvardai.txt";
     vector<Studentas> Grupe = skaitymas(failo_vardas);
 
     if(Grupe.empty()){
@@ -91,7 +91,9 @@ int main() {
         return 1;
     }
 
-
+    sort(Grupe.begin(),Grupe.end(), [](const Studentas& a, const Studentas&b){
+         return a.vard<b.vard;
+         });
 
     cout << "Ka norite isvesti?" << endl;
     cout << "1 - Vidurki" << endl;
