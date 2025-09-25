@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <fstream>
 #include <sstream>
+#include <windows.h>
 
 using std::cout;
 using std::cin;
@@ -18,6 +19,7 @@ using std::setprecision;
 using std::fixed;
 using std::ifstream;
 using std::istringstream;
+using std::ofstream;
 
 
 
@@ -33,6 +35,7 @@ struct Studentas {
 
 
 double sk_med(vector<int> paz);
+void irasymas_i_faila(const vector<Studentas>& Grupe, const string& failo_vardas);
 
 vector<Studentas> skaitymas(const string& filename) {
     vector<Studentas> Grupe;
@@ -83,7 +86,10 @@ vector<Studentas> skaitymas(const string& filename) {
 }
 
 int main() {
-    string failo_vardas = "studentai1000000.txt";
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
+
+    string failo_vardas = "studentai10000.txt";
     vector<Studentas> Grupe = skaitymas(failo_vardas);
 
     if(Grupe.empty()){
@@ -130,6 +136,9 @@ int main() {
         cout << endl;
         if (++kiek == 20) break;
     }
+
+    irasymas_i_faila(Grupe, "rezultatai.txt");
+
 }
 
 
@@ -165,6 +174,28 @@ Studentas ivesk()
 
     return Laik;
 }
+
+void irasymas_i_faila(const vector<Studentas>& Grupe, const string& failo_vardas) {
+    ofstream out(failo_vardas);
+    if (!out) {
+        cout << "Nepavyko sukurti failo: " << failo_vardas << endl;
+        return;
+    }
+
+    out << left << setw(15) << "Vardas" << " | " << setw(20) << "Pavarde" << " | "
+        << setw(10) << "Vidurkis" << " | " << setw(10) << "Mediana" << endl;
+    out << string(60, '-') << endl;
+
+    for (auto &temp : Grupe) {
+        out << left << setw(15) << temp.vard << " | "
+            << setw(20) << temp.pav << " | "
+            << setw(10) << fixed << setprecision(2) << temp.vid << " | "
+            << setw(10) << fixed << setprecision(2) << temp.med << endl;
+    }
+
+    cout << "Rezultatai issaugoti faile " << " '"<< failo_vardas << "' "<< endl;
+}
+
 
 double sk_med(vector<int> paz) {
     sort(paz.begin(), paz.end());
