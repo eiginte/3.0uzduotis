@@ -41,7 +41,8 @@ double sk_med(vector<int> paz);
 vector<Studentas> skaitymas(const string& filename);
 Studentas ivesk();
 void irasymas_i_faila(const vector<Studentas>& Grupe, const string& failo_vardas);
-Studentas sugeneruoti_studento(int nd_max_sk = 5);
+Studentas sugeneruoti_studento(int nd_sk);
+void generuoti_faila_su_studentais(const string& failo_vardas, int kiek, int nd_sk);
 
 int main() {
     SetConsoleOutputCP(CP_UTF8);
@@ -53,6 +54,7 @@ int main() {
     cout << "1 - Įvesti studentus patiems" << endl;
     cout << "2 - Sugeneruoti atsitiktinius balus" << endl;
     cout << "3 - Nuskaityti duomenis iš failo" << endl;
+    cout << "4 - Sugeneruoti studentu faila (tik ND ir egzaminas)" << endl;
     cout << "Pasirinkite: ";
     int pradzios_pasirinkimas;
     cin >> pradzios_pasirinkimas;
@@ -84,6 +86,19 @@ int main() {
             cout << "Tuscias failas arba klaida" << endl;
             return 1;
         }
+    }
+    else if (pradzios_pasirinkimas == 4) {
+        int kiek, nd_sk;
+        string failo_vardas;
+        cout << "Kiek studentu sugeneruoti? ";
+        cin >> kiek;
+        cout << "Kiek namu darbu generuoti kiekvienam studentui? ";
+        cin >> nd_sk;
+        cout << "Įveskite failo pavadinimą (pvz. studentai.txt): ";
+        cin >> failo_vardas;
+        generuoti_faila_su_studentais(failo_vardas, kiek, nd_sk);
+        cout << "Failas '" << failo_vardas << "' sėkmingai sugeneruotas!" << endl;
+        return 0;
     }
     else {
         cout << "Netinkamas pasirinkimas." << endl;
@@ -149,7 +164,6 @@ void irasymas_i_faila(const vector<Studentas>& Grupe, const string& failo_vardas
 
     cout << "Rezultatai issaugoti faile " << failo_vardas << endl;
 }
-
 
 Studentas ivesk() {
     Studentas Laik;
@@ -266,4 +280,27 @@ vector<Studentas> skaitymas(const string& filename) {
     }
 
     return Grupe;
+}
+void generuoti_faila_su_studentais(const string& failo_vardas, int kiek, int nd_sk) {
+    ofstream out(failo_vardas);
+    if (!out) {
+        cout << "Nepavyko sukurti failo." << endl;
+        return;
+    }
+
+    out << "Vardas Pavarde ";
+    for (int i = 1; i <= nd_sk; ++i)
+        out << "ND" << i << " ";
+    out << "Egzaminas" << endl;
+
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dist(1, 10);
+
+    for (int i = 1; i <= kiek; ++i) {
+        out << "Vardas" << i << " Pavarde" << i << " ";
+        for (int j = 0; j < nd_sk; ++j)
+            out << dist(gen) << " ";
+        out << dist(gen) << endl;
+    }
 }
