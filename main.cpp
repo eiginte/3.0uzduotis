@@ -25,7 +25,7 @@ using std::random_device;
 using std::mt19937;
 using std::uniform_int_distribution;
 using std::stringstream;
-
+using std::sort;
 
 struct Studentas {
     string vard;
@@ -35,7 +35,6 @@ struct Studentas {
     double vid;
     double med;
 };
-
 
 double sk_med(vector<int> paz);
 vector<Studentas> skaitymas(const string& filename);
@@ -56,33 +55,34 @@ int main() {
     cout << "3 - Nuskaityti duomenis iš failo" << endl;
     cout << "4 - Sugeneruoti studentu faila (tik ND ir egzaminas)" << endl;
     cout << "Pasirinkite: ";
+
     int pradzios_pasirinkimas;
     cin >> pradzios_pasirinkimas;
 
-    if(pradzios_pasirinkimas == 1) {
+    if (pradzios_pasirinkimas == 1) {
         char dar;
         do {
             Grupe.push_back(ivesk());
             cout << "Norite įvesti dar viena studentą? (t/n): ";
             cin >> dar;
-        } while(dar == 't' || dar == 'T');
+        } while (dar == 't' || dar == 'T');
     }
-    else if(pradzios_pasirinkimas == 2) {
+    else if (pradzios_pasirinkimas == 2) {
         int kiek;
         cout << "Kiek studentu sugeneruoti? ";
         cin >> kiek;
-        cout <<"Kiek namu darbu generuoti kiekvienam studentui?";
+        cout << "Kiek namu darbu generuoti kiekvienam studentui? ";
         int nd_sk;
         cin >> nd_sk;
-        for(int i = 0; i < kiek; ++i)
+        for (int i = 0; i < kiek; ++i)
             Grupe.push_back(sugeneruoti_studento(nd_sk));
     }
-    else if(pradzios_pasirinkimas == 3) {
+    else if (pradzios_pasirinkimas == 3) {
         string failo_vardas;
         cout << "Įveskite failo pavadinimą: ";
         cin >> failo_vardas;
         Grupe = skaitymas(failo_vardas);
-        if(Grupe.empty()){
+        if (Grupe.empty()) {
             cout << "Tuscias failas arba klaida" << endl;
             return 1;
         }
@@ -97,7 +97,7 @@ int main() {
         cout << "Įveskite failo pavadinimą (pvz. studentai.txt): ";
         cin >> failo_vardas;
         generuoti_faila_su_studentais(failo_vardas, kiek, nd_sk);
-        cout << "Failas '" << failo_vardas << "' sėkmingai sugeneruotas!" << endl;
+        cout << "Failas '" << failo_vardas << "' sugeneruotas." << endl;
         return 0;
     }
     else {
@@ -105,7 +105,7 @@ int main() {
         return 1;
     }
 
-    sort(Grupe.begin(), Grupe.end(), [](const Studentas& a, const Studentas& b){
+    sort(Grupe.begin(), Grupe.end(), [](const Studentas& a, const Studentas& b) {
         return a.vard < b.vard;
     });
 
@@ -114,55 +114,64 @@ int main() {
     cout << "2 - Mediana" << endl;
     cout << "3 - Abu (vidurki ir mediana)" << endl;
     cout << "Pasirinkite: ";
+
     int pasirinkimas;
     cin >> pasirinkimas;
 
-    cout << left << setw(15) << "Vardas" << " | " << setw(20) << "Pavarde" << " | ";
-    if (pasirinkimas == 1)
-        cout << setw(10)<< "Vidurkis: ";
-    else if (pasirinkimas == 2)
-        cout << setw(10) << "Mediana: ";
-    else
-        cout << setw(10) << "Vidurkis" << " | " << setw(10) << "Mediana";
-    cout << endl;
-    cout << string(70, '-') << endl;
-
-    int kiek = 0;
-    for (auto temp : Grupe) {
-        cout << left << setw(15) << temp.vard << " | " << setw(20) << temp.pav << " | ";
-        if (pasirinkimas == 1)
-            cout << setw(10) << fixed << setprecision(2) << temp.vid;
-        else if (pasirinkimas == 2)
-            cout << setw(10) << fixed << setprecision(2) << temp.med;
-        else
-            cout << setw(10) << fixed << setprecision(2) << temp.vid << " | "
-                 << setw(10) << fixed << setprecision(2) << temp.med;
-        cout << endl;
-        if (++kiek == 20) break;
+    int skirstymas = pasirinkimas;
+    if (pasirinkimas == 3) {
+        cout << "Pagal ka norite skirstyti studentus? (1 - pagal vidurki, 2 - pagal mediana): ";
+        cin >> skirstymas;
     }
 
-    irasymas_i_faila(Grupe, "rezultatai.txt");
+    vector<Studentas> vargsiukai;
+    vector<Studentas> kietiakiai;
+
+    for (auto& s : Grupe) {
+        double balas = (skirstymas == 1) ? s.vid : s.med;
+        if (balas < 5.0)
+            vargsiukai.push_back(s);
+        else
+            kietiakiai.push_back(s);
+    }
+
+    irasymas_i_faila(vargsiukai, "vargsiukai.txt");
+    irasymas_i_faila(kietiakiai, "kietiakiai.txt");
+
+    cout << "Rezultatai issaugoti i failus: vargsiukai.txt ir kietiakiai.txt" << endl;
 }
 
-void irasymas_i_faila(const vector<Studentas>& Grupe, const string& failo_vardas) {
+void generuoti_faila_su_studentais(const string& failo_vardas, int kiek, int nd_sk) {
     ofstream out(failo_vardas);
     if (!out) {
-        cout << "Nepavyko sukurti failo: " << failo_vardas << endl;
+        cout << "Nepavyko sukurti failo." << endl;
         return;
     }
 
-    out << left << setw(15) << "Vardas" << " | " << setw(20) << "Pavarde" << " | "
-        << setw(10) << "Vidurkis" << " | " << setw(10) << "Mediana" << endl;
-    out << string(60, '-') << endl;
+    out << "Vardas Pavarde ";
+    for (int i = 1; i <= nd_sk; ++i)
+        out << "ND" << i << " ";
+    out << "Egzaminas" << endl;
 
-    for (auto &temp : Grupe) {
-        out << left << setw(15) << temp.vard << " | "
-            << setw(20) << temp.pav << " | "
-            << setw(10) << fixed << setprecision(2) << temp.vid << " | "
-            << setw(10) << fixed << setprecision(2) << temp.med << endl;
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dist(1, 10);
+
+    for (int i = 1; i <= kiek; ++i) {
+        out << "Vardas" << i << " Pavarde" << i << " ";
+        for (int j = 0; j < nd_sk; ++j)
+            out << dist(gen) << " ";
+        out << dist(gen) << endl;
     }
+}
 
-    cout << "Rezultatai issaugoti faile " << failo_vardas << endl;
+double sk_med(vector<int> paz) {
+    std::sort(paz.begin(), paz.end());
+    size_t dydis = paz.size();
+    if (dydis % 2 == 0)
+        return (paz[dydis / 2 - 1] + paz[dydis / 2]) / 2.0;
+    else
+        return paz[dydis / 2];
 }
 
 Studentas ivesk() {
@@ -173,7 +182,7 @@ Studentas ivesk() {
     cout << "Ivesk pavarde: ";
     cin >> Laik.pav;
 
-    cout << "Iveskite namu darbu pazymius (iveskite 0, jei norite baigti n.d. ivedima)" << endl;
+    cout << "Iveskite namu darbu pazymius (iveskite 0, jei norite baigti):" << endl;
     while (true) {
         cin >> m;
         if (m == 0) break;
@@ -181,7 +190,7 @@ Studentas ivesk() {
         sum += m;
     }
 
-    cout << "Iveskite egzamina: ";
+    cout << "Iveskite egzamino pazymi: ";
     cin >> Laik.egzas;
 
     if (!Laik.paz.empty()) {
@@ -211,29 +220,18 @@ Studentas sugeneruoti_studento(int nd_sk) {
     uniform_int_distribution<> paz_dist(1, 10);
     uniform_int_distribution<> egz_dist(1, 10);
 
-
-    for(int i = 0; i < nd_sk; ++i)
+    for (int i = 0; i < nd_sk; ++i)
         Laik.paz.push_back(paz_dist(gen));
 
     Laik.egzas = egz_dist(gen);
 
     int sum = 0;
-    for(auto x : Laik.paz) sum += x;
-    Laik.vid = Laik.egzas * 0.6 + double(sum)/Laik.paz.size()*0.4;
-    Laik.med = Laik.egzas * 0.6 + sk_med(Laik.paz)*0.4;
+    for (auto x : Laik.paz) sum += x;
+    Laik.vid = Laik.egzas * 0.6 + double(sum) / Laik.paz.size() * 0.4;
+    Laik.med = Laik.egzas * 0.6 + sk_med(Laik.paz) * 0.4;
 
     return Laik;
 }
-
-double sk_med(vector<int> paz) {
-    sort(paz.begin(), paz.end());
-    size_t dydis = paz.size();
-    if (dydis % 2 == 0)
-        return (paz[dydis / 2 - 1] + paz[dydis / 2]) / 2.0;
-    else
-        return paz[dydis / 2];
-}
-
 
 vector<Studentas> skaitymas(const string& filename) {
     vector<Studentas> Grupe;
@@ -256,9 +254,8 @@ vector<Studentas> skaitymas(const string& filename) {
 
         vector<int> visiPaz;
         int sk;
-        while (iss >> sk) {
+        while (iss >> sk)
             visiPaz.push_back(sk);
-        }
 
         if (visiPaz.empty()) continue;
 
@@ -281,26 +278,24 @@ vector<Studentas> skaitymas(const string& filename) {
 
     return Grupe;
 }
-void generuoti_faila_su_studentais(const string& failo_vardas, int kiek, int nd_sk) {
+
+void irasymas_i_faila(const vector<Studentas>& Grupe, const string& failo_vardas) {
     ofstream out(failo_vardas);
     if (!out) {
-        cout << "Nepavyko sukurti failo." << endl;
+        cout << "Nepavyko sukurti failo: " << failo_vardas << endl;
         return;
     }
 
-    out << "Vardas Pavarde ";
-    for (int i = 1; i <= nd_sk; ++i)
-        out << "ND" << i << " ";
-    out << "Egzaminas" << endl;
+    out << left << setw(15) << "Vardas" << " | "
+        << setw(20) << "Pavarde" << " | "
+        << setw(10) << "Vidurkis" << " | "
+        << setw(10) << "Mediana" << endl;
+    out << string(60, '-') << endl;
 
-    random_device rd;
-    mt19937 gen(rd());
-    uniform_int_distribution<> dist(1, 10);
-
-    for (int i = 1; i <= kiek; ++i) {
-        out << "Vardas" << i << " Pavarde" << i << " ";
-        for (int j = 0; j < nd_sk; ++j)
-            out << dist(gen) << " ";
-        out << dist(gen) << endl;
+    for (auto& s : Grupe) {
+        out << left << setw(15) << s.vard << " | "
+            << setw(20) << s.pav << " | "
+            << setw(10) << fixed << setprecision(2) << s.vid << " | "
+            << setw(10) << fixed << setprecision(2) << s.med << endl;
     }
 }
