@@ -4,6 +4,7 @@
 #include <sstream>
 #include <iomanip>
 #include <random>
+#include <algorithm>
 
 using namespace std;
 
@@ -95,11 +96,27 @@ void StudentuGrupe::irasyti_i_faila(const vector<Studentas>& grupe, const string
 }
 
 void StudentuGrupe::skirstyti_studentus(int pagal_vid_ar_med) {
-    vector<Studentas> vargsiukai, kietiakiai;
+    vector<Studentas> vargsiukai;
+    vector<Studentas> kietiakiai;
+
     for (auto& s : visi) {
         double balas = (pagal_vid_ar_med == 1) ? s.vid : s.med;
-        if (balas < 5.0) vargsiukai.push_back(s);
-        else kietiakiai.push_back(s);
+        if (balas < 5.0)
+            vargsiukai.push_back(s);
+        else
+            kietiakiai.push_back(s);
+    }
+
+    if (pagal_vid_ar_med == 1) {
+        std::sort(vargsiukai.begin(), vargsiukai.end(),
+            [](const Studentas& a, const Studentas& b) { return a.vid > b.vid; });
+        std::sort(kietiakiai.begin(), kietiakiai.end(),
+            [](const Studentas& a, const Studentas& b) { return a.vid > b.vid; });
+    } else {
+        std::sort(vargsiukai.begin(), vargsiukai.end(),
+            [](const Studentas& a, const Studentas& b) { return a.med > b.med; });
+        std::sort(kietiakiai.begin(), kietiakiai.end(),
+            [](const Studentas& a, const Studentas& b) { return a.med > b.med; });
     }
 
     irasyti_i_faila(vargsiukai, "vargsiukai.txt");
