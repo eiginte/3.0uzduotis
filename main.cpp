@@ -2,7 +2,10 @@
 #include "StudentuGrupe.h"
 #include <windows.h>
 
-using namespace std;
+using std::cout;
+using std::cin;
+using std::endl;
+using std::string;
 
 int main() {
 
@@ -60,5 +63,9 @@ int main() {
     cout << "Skirstyti pagal (1 - vidurki, 2 - mediana): ";
     int pagal; cin >> pagal;
 
-    grupe.skirstyti_studentus(pagal);
+    cout << "Ar norite surikiuoti studentus pagal pavarde? (1 - ne, 2 - taip): ";
+    int rikiuotiPagal;
+    cin >> rikiuotiPagal;
+
+    grupe.skirstyti_studentus(pagal, rikiuotiPagal);
 }

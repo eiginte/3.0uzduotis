@@ -6,7 +6,22 @@
 #include <random>
 #include <algorithm>
 
-using namespace std;
+using std::cout;
+using std::endl;
+using std::ifstream;
+using std::ofstream;
+using std::istringstream;
+using std::string;
+using std::vector;
+using std::setw;
+using std::left;
+using std::fixed;
+using std::setprecision;
+using std::random_device;
+using std::mt19937;
+using std::uniform_int_distribution;
+
+
 
 void StudentuGrupe::prideti_studenta(const Studentas& s) {
     visi.push_back(s);
@@ -95,7 +110,7 @@ void StudentuGrupe::irasyti_i_faila(const vector<Studentas>& grupe, const string
     }
 }
 
-void StudentuGrupe::skirstyti_studentus(int pagal_vid_ar_med) {
+void StudentuGrupe::skirstyti_studentus(int pagal_vid_ar_med, int rikiuotiPagal) {
     vector<Studentas> vargsiukai;
     vector<Studentas> kietiakiai;
 
@@ -117,6 +132,14 @@ void StudentuGrupe::skirstyti_studentus(int pagal_vid_ar_med) {
             [](const Studentas& a, const Studentas& b) { return a.med > b.med; });
         std::sort(kietiakiai.begin(), kietiakiai.end(),
             [](const Studentas& a, const Studentas& b) { return a.med > b.med; });
+    }
+
+ if (rikiuotiPagal == 2) {
+        std::sort(vargsiukai.begin(), vargsiukai.end(),
+            [](const Studentas& a, const Studentas& b) { return a.pav < b.pav; });
+        std::sort(kietiakiai.begin(), kietiakiai.end(),
+            [](const Studentas& a, const Studentas& b) { return a.pav < b.pav; });
+        cout << "Abu sarasai surikiuoti pagal pavarde." << endl;
     }
 
     irasyti_i_faila(vargsiukai, "vargsiukai.txt");
