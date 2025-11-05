@@ -43,6 +43,9 @@ int main() {
             cout << "Egzamino pazymys: "; cin >> s.egzas;
 
             s.skaiciuoti_rezultatus();
+
+            cout << "Studento objektas saugomas adrese: " << &s << endl;
+
             grupe.prideti_studenta(s);
         }
     }
