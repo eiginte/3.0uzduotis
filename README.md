@@ -1,45 +1,14 @@
-# pirmas_projektas
-Failo is 1000 irasu nuskaitymo laikas: 0.0036101
+| Įrašų  skaičius | Konteineris | Nuskaitymas (s) | Skirstymas (s) | Įrašymas (s) | Iš viso:  |
+|-----------------|-------------|-----------------|----------------|--------------|-----------|
+| 1000            | vector      | 0.0068874       | 0.0111862      | 0.0079608    | 0.0260344 |
+|                 |             | 0.0069878       | 0.0117141      | 0.0071147    | 0.0258166 |
+|                 |             | 0.0092995       | 0.0086578      | 0.006482     | 0.0244393 |
 
-Rezultatai issaugoti i failus: vargsiukai.txt ir kietiakiai.txt
+                  | Vidurkis:   | 0.0077249       | 0.0105194      | 0.0071858    | 0.0254301 |
 
-1000 irasu dalijimo i dvi grupes laikas: 0.0077713
-
-1000 irasu irasymo i faila laikas: 0.0075068
-
-
-Failo is 10000 irasu nuskaitymo laikas: 0.062752
-
-Rezultatai issaugoti i failus: vargsiukai.txt ir kietiakiai.txt
-
-10000 irasu dalijimo i dvi grupes laikas: 0.031971
-
-10000 irasu irasymo i faila laikas: 0.0366063
-
-
-Failo is 100000 irasu nuskaitymo laikas: 0.3256
-
-Rezultatai issaugoti i failus: vargsiukai.txt ir kietiakiai.txt
-
-100000 irasu dalijimo i dvi grupes laikas: 0.275096
-
-100000 irasu irasymo i faila laikas: 0.219169
-
-
-Failo is 1000000 irasu nuskaitymo laikas: 3.21123
-
-Rezultatai issaugoti i failus: vargsiukai.txt ir kietiakiai.txt
-
-1000000 irasu dalijimo i dvi grupes laikas: 3.78267
-
-1000000 irasu irasymo i faila laikas: 3.75043
-
-
-Failo is 10000000 irasu nuskaitymo laikas: 39.5044
-
-Rezultatai issaugoti i failus: vargsiukai.txt ir kietiakiai.txt
-
-10000000 irasu dalijimo i dvi grupes laikas: 35.4462
-
-10000000 irasu irasymo i faila laikas: 31.7192
-
+| Įrašų  skaičius | Konteineris | Nuskaitymas (s) | Skirstymas (s) | Įrašymas (s) | Iš viso:  |
+|-----------------|-------------|-----------------|----------------|--------------|-----------|
+| 1000            | list        | 0.0068929       | 0.0106156      | 0.0013692    | 0.0188777 |
+|                 |             | 0.0069114       | 0.0114556      | 0.0010302    | 0.0193972 |
+|                 |             | 0.0078119       | 0.0099378      | 0.0010522    | 0.0188019 |
+|                 | Vidurkis:   | 0.0072054       | 0.0106697      | 0.0011505    | 0.0190256 |
