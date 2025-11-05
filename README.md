@@ -1,3 +1,7 @@
+CPU: Intel Core i5-10210U, 10-oji karta, 4 branduoliai / 8 gijos, 1.6 GHz bazinis dažnis (iki ~4.2 GHz Turbo)
+RAM: 16 GB DDR4-2400 MHz (2 × 8 GB, Hynix)
+SSD: 512 GB Lexar NM620 PCIe NVMe SSD
+
 | Įrašų  skaičius | Konteineris | Nuskaitymas (s) | Skirstymas (s) | Įrašymas (s) | Iš viso:  |
 |-----------------|-------------|-----------------|----------------|--------------|-----------|
 | 1000            | vector      | 0.0068874       | 0.0111862      | 0.0079608    | 0.0260344 |
