@@ -9,8 +9,15 @@ using std::string;
 
 int main() {
 
+    cout << "Pasirinkite konteineri:\n"
+     << "1 - vector\n"
+     << "2 - list\n> ";
+    int konteineris;
+    cin >> konteineris;
 
     StudentuGrupe grupe;
+    grupe.naudotiVector = (konteineris == 1);
+
 
     cout << "Pasirinkite veiksma:\n"
          << "1 - Ivesti studentus\n"

@@ -20,11 +20,15 @@ using std::setprecision;
 using std::random_device;
 using std::mt19937;
 using std::uniform_int_distribution;
+using std::list;
 
 
 
 void StudentuGrupe::prideti_studenta(const Studentas& s) {
-    visi.push_back(s);
+    if (naudotiVector)
+        visi_vector.push_back(s);
+    else
+        visi_list.push_back(s);
 }
 
 void StudentuGrupe::skaityti_is_failo(const string& failas) {
@@ -53,7 +57,11 @@ void StudentuGrupe::skaityti_is_failo(const string& failas) {
         paz.pop_back();
         s.paz = paz;
         s.skaiciuoti_rezultatus();
-        visi.push_back(s);
+
+        if (naudotiVector)
+            visi_vector.push_back(s);
+        else
+            visi_list.push_back(s);
     }
 }
 
@@ -69,7 +77,10 @@ void StudentuGrupe::generuoti_studentus(int kiek, int nd_sk) {
         for (int j = 0; j < nd_sk; ++j) s.paz.push_back(dist(gen));
         s.egzas = dist(gen);
         s.skaiciuoti_rezultatus();
-        visi.push_back(s);
+         if (naudotiVector)
+            visi_vector.push_back(s);
+        else
+            visi_list.push_back(s);
     }
 }
 
@@ -94,7 +105,7 @@ void StudentuGrupe::generuoti_faila(const string& failas, int kiek, int nd_sk) {
     cout << "Failas \"" << failas << "\" sugeneruotas." << endl;
 }
 
-void StudentuGrupe::irasyti_i_faila(const vector<Studentas>& grupe, const string& failas) {
+void StudentuGrupe::irasyti_i_faila(const vector<Studentas>& grupe, const std::string& failas) {
     ofstream out(failas);
     if (!out) { cout << "Nepavyko sukurti failo: " << failas << endl; return; }
 
@@ -102,7 +113,7 @@ void StudentuGrupe::irasyti_i_faila(const vector<Studentas>& grupe, const string
         << " | " << setw(10) << "Vidurkis" << " | " << setw(10) << "Mediana\n";
     out << string(60, '-') << "\n";
 
-    for (auto& s : grupe) {
+    for (const auto& s : grupe) {
         out << left << setw(15) << s.vard << " | "
             << setw(15) << s.pav << " | "
             << setw(10) << fixed << setprecision(2) << s.vid << " | "
@@ -110,40 +121,86 @@ void StudentuGrupe::irasyti_i_faila(const vector<Studentas>& grupe, const string
     }
 }
 
+void StudentuGrupe::irasyti_i_faila(const list<Studentas>& grupe, const std::string& failas) {
+    ofstream out(failas);
+    if (!out) { cout << "Nepavyko sukurti failo: " << failas << endl; return; }
+
+    out << left << setw(15) << "Vardas" << " | " << setw(15) << "Pavarde"
+        << " | " << setw(10) << "Vidurkis" << " | " << setw(10) << "Mediana\n";
+    out << string(60, '-') << "\n";
+
+    for (const auto& s : grupe) {
+        out << left << setw(15) << s.vard << " | "
+            << setw(15) << s.pav << " | "
+            << setw(10) << fixed << setprecision(2) << s.vid << " | "
+            << setw(10) << fixed << setprecision(2) << s.med << "\n";
+    }
+}
+
+
 void StudentuGrupe::skirstyti_studentus(int pagal_vid_ar_med, int rikiuotiPagal) {
-    vector<Studentas> vargsiukai;
-    vector<Studentas> kietiakiai;
+    if (naudotiVector) {
+        std::vector<Studentas> vargsiukai;
+        std::vector<Studentas> kietiakiai;
 
-    for (auto& s : visi) {
-        double balas = (pagal_vid_ar_med == 1) ? s.vid : s.med;
-        if (balas < 5.0)
-            vargsiukai.push_back(s);
-        else
-            kietiakiai.push_back(s);
+        for (auto& s : visi_vector) {
+            double balas = (pagal_vid_ar_med == 1) ? s.vid : s.med;
+            if (balas < 5.0)
+                vargsiukai.push_back(s);
+            else
+                kietiakiai.push_back(s);
+        }
+
+        if (pagal_vid_ar_med == 1) {
+            std::sort(vargsiukai.begin(), vargsiukai.end(),
+                [](const Studentas& a, const Studentas& b) { return a.vid > b.vid; });
+            std::sort(kietiakiai.begin(), kietiakiai.end(),
+                [](const Studentas& a, const Studentas& b) { return a.vid > b.vid; });
+        } else {
+            std::sort(vargsiukai.begin(), vargsiukai.end(),
+                [](const Studentas& a, const Studentas& b) { return a.med > b.med; });
+            std::sort(kietiakiai.begin(), kietiakiai.end(),
+                [](const Studentas& a, const Studentas& b) { return a.med > b.med; });
+        }
+
+        if (rikiuotiPagal == 2) {
+            std::sort(vargsiukai.begin(), vargsiukai.end(),
+                [](const Studentas& a, const Studentas& b) { return a.pav < b.pav; });
+            std::sort(kietiakiai.begin(), kietiakiai.end(),
+                [](const Studentas& a, const Studentas& b) { return a.pav < b.pav; });
+        }
+
+        irasyti_i_faila(vargsiukai, "vargsiukai.txt");
+        irasyti_i_faila(kietiakiai, "kietiakiai.txt");
+    }
+    else {
+        std::list<Studentas> vargsiukai;
+        std::list<Studentas> kietiakiai;
+
+        for (auto& s : visi_list) {
+            double balas = (pagal_vid_ar_med == 1) ? s.vid : s.med;
+            if (balas < 5.0)
+                vargsiukai.push_back(s);
+            else
+                kietiakiai.push_back(s);
+        }
+
+        if (pagal_vid_ar_med == 1) {
+            vargsiukai.sort([](const Studentas& a, const Studentas& b) { return a.vid > b.vid; });
+            kietiakiai.sort([](const Studentas& a, const Studentas& b) { return a.vid > b.vid; });
+        } else {
+            vargsiukai.sort([](const Studentas& a, const Studentas& b) { return a.med > b.med; });
+            kietiakiai.sort([](const Studentas& a, const Studentas& b) { return a.med > b.med; });
+        }
+
+        if (rikiuotiPagal == 2) {
+            vargsiukai.sort([](const Studentas& a, const Studentas& b) { return a.pav < b.pav; });
+            kietiakiai.sort([](const Studentas& a, const Studentas& b) { return a.pav < b.pav; });
+        }
+
+        irasyti_i_faila(vargsiukai, "vargsiukai.txt");
+        irasyti_i_faila(kietiakiai, "kietiakiai.txt");
     }
 
-    if (pagal_vid_ar_med == 1) {
-        std::sort(vargsiukai.begin(), vargsiukai.end(),
-            [](const Studentas& a, const Studentas& b) { return a.vid > b.vid; });
-        std::sort(kietiakiai.begin(), kietiakiai.end(),
-            [](const Studentas& a, const Studentas& b) { return a.vid > b.vid; });
-    } else {
-        std::sort(vargsiukai.begin(), vargsiukai.end(),
-            [](const Studentas& a, const Studentas& b) { return a.med > b.med; });
-        std::sort(kietiakiai.begin(), kietiakiai.end(),
-            [](const Studentas& a, const Studentas& b) { return a.med > b.med; });
-    }
-
- if (rikiuotiPagal == 2) {
-        std::sort(vargsiukai.begin(), vargsiukai.end(),
-            [](const Studentas& a, const Studentas& b) { return a.pav < b.pav; });
-        std::sort(kietiakiai.begin(), kietiakiai.end(),
-            [](const Studentas& a, const Studentas& b) { return a.pav < b.pav; });
-        cout << "Abu sarasai surikiuoti pagal pavarde." << endl;
-    }
-
-    irasyti_i_faila(vargsiukai, "vargsiukai.txt");
-    irasyti_i_faila(kietiakiai, "kietiakiai.txt");
-
-    cout << "Rezultatai issaugoti i failus: vargsiukai.txt ir kietiakiai.txt" << endl;
+    std::cout << "Rezultatai issaugoti i failus: vargsiukai.txt ir kietiakiai.txt" << std::endl;
 }
