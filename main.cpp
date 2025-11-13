@@ -9,6 +9,10 @@ using std::string;
 
 int main() {
 
+    int strategija;
+    cout << "Pasirinkite strategija (1 - du konteineriai, 2 - vienas su trynimais): ";
+    cin >> strategija;
+
     cout << "Pasirinkite konteineri:\n"
      << "1 - vector\n"
      << "2 - list\n> ";
@@ -44,9 +48,9 @@ int main() {
 
             s.skaiciuoti_rezultatus();
 
-            cout << "Studento objektas saugomas adrese: " << &s << endl;
+            const Studentas* addr = grupe.prideti_studenta(s);
+            cout << "Studento objektas saugomas konteineryje adrese: " << addr << endl;
 
-            grupe.prideti_studenta(s);
         }
     }
     else if (pasirinkimas == 2) {
@@ -77,5 +81,5 @@ int main() {
     int rikiuotiPagal;
     cin >> rikiuotiPagal;
 
-    grupe.skirstyti_studentus(pagal, rikiuotiPagal);
+    grupe.skirstyti_studentus(pagal, rikiuotiPagal, strategija);
 }
