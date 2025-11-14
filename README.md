@@ -188,3 +188,19 @@ SSD: 512 GB Lexar NM620 PCIe NVMe SSD
 |                 |             |          37.956 |        29.2248 |      13.9764 |   81.1572 |
 |                 |             |         21.0603 |        33.3876 |      12.6792 |   67.1271 |
 |                 | Vidurkis:   |         27.6737 |        33.2692 |      13.4934 |   74.4363 |
+
+
+PROGRAMOS NAUDOJIMOSI INSTRUKCIJA:
+Programa susideda iš: Studentas.h, Studentas.cpp, StudentuGrupe.cpp ir main.cpp failų.
+Paleidus programą pasirenkame kokią strategiją norime naudoti (trečioji veikia tik su vector).
+Pasirinkus strategiją pasirenkame kokį konteinerį norime naudoti, tuomet kok5 veiksmą norime atlikti
+<img width="942" height="299" alt="image" src="https://github.com/user-attachments/assets/26e427fc-eeb2-4cba-b3ad-a852a78a4443" />
+Jei pasirenkame 1-3 variantus, toliau renkames pagal ką norime skirstyti studentus:
+<img width="556" height="38" alt="image" src="https://github.com/user-attachments/assets/d4410a2b-c593-4403-afbd-5dcd1f939466" />
+Tuomet pasirenkame, ar norime, jog jie būtų surūšiuoti pagal pavardę, ar ne.
+Programai sekmingai suveikus matome, kokiuose failuose išsaugoti failai.
+
+
+
+
+
