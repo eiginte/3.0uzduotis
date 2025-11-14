@@ -191,6 +191,26 @@ SSD: 512 GB Lexar NM620 PCIe NVMe SSD
 
 
 PROGRAMOS NAUDOJIMOSI INSTRUKCIJA:
+Kompiliavimui ir paleidimui su CMake:
+sukurkite katalogą kompiliavimui:
+mkdir build
+cd build
+
+konfigūruokite projektą:
+cmake ..
+
+kompiliuokite:
+cmake --build .
+
+paleiskite programą:
+su Unix/Linux/MacOS:
+./studentai
+
+su Windows:
+studentai.exe
+
+
+
 Programa susideda iš: Studentas.h, Studentas.cpp, StudentuGrupe.cpp ir main.cpp failų.
 Paleidus programą pasirenkame kokią strategiją norime naudoti (trečioji veikia tik su vector).
 Pasirinkus strategiją pasirenkame kokį konteinerį norime naudoti, tuomet kok5 veiksmą norime atlikti
