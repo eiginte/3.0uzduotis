@@ -180,32 +180,85 @@ void StudentuGrupe::skirstyti_studentus(int pagal_vid_ar_med, int rikiuotiPagal,
             irasyti_i_faila(vargsiukai, "vargsiukai.txt");
             irasyti_i_faila(kietiakiai, "kietiakiai.txt");
         }
-        else if (strategija == 2) {
+else if (strategija == 2) {
 
-            std::vector<Studentas> vargsiukai;
+    std::vector<Studentas> vargsiukai;
 
-            auto it = std::remove_if(visi_vector.begin(), visi_vector.end(),
+    auto it = std::remove_if(visi_vector.begin(), visi_vector.end(),
+        [&](const Studentas& s) {
+            double balas = (pagal_vid_ar_med == 1) ? s.vid : s.med;
+            if (balas < 5.0) {
+                vargsiukai.push_back(s);
+                return true;
+            }
+            return false;
+        });
+
+    visi_vector.erase(it, visi_vector.end()); // čia   kietiakiai lieka
+
+    if (rikiuotiPagal == 1) {
+        if (pagal_vid_ar_med == 1) {
+            std::sort(vargsiukai.begin(), vargsiukai.end(),
+                [](const Studentas& a, const Studentas& b) { return a.vid > b.vid; });
+            std::sort(visi_vector.begin(), visi_vector.end(),
+                [](const Studentas& a, const Studentas& b) { return a.vid > b.vid; });
+        } else {
+            std::sort(vargsiukai.begin(), vargsiukai.end(),
+                [](const Studentas& a, const Studentas& b) { return a.med > b.med; });
+            std::sort(visi_vector.begin(), visi_vector.end(),
+                [](const Studentas& a, const Studentas& b) { return a.med > b.med; });
+        }
+    }
+    else if (rikiuotiPagal == 2) {
+        std::sort(vargsiukai.begin(), vargsiukai.end(),
+            [](const Studentas& a, const Studentas& b) { return a.pav < b.pav; });
+        std::sort(visi_vector.begin(), visi_vector.end(),
+            [](const Studentas& a, const Studentas& b) { return a.pav < b.pav; });
+    }
+
+    irasyti_i_faila(vargsiukai, "vargsiukai.txt");
+    irasyti_i_faila(visi_vector, "kietiakiai.txt");
+}
+else if (strategija == 3) {
+
+
+            auto partitionPoint = std::partition(
+                visi_vector.begin(),
+                visi_vector.end(),
                 [&](const Studentas& s) {
                     double balas = (pagal_vid_ar_med == 1) ? s.vid : s.med;
-                    if (balas < 5.0) {
-                        vargsiukai.push_back(s);
-                        return true;
-                    }
-                    return false;
-                });
+                    return balas >= 5.0;  // TRUE → kietiakiai
+                }
+            );
 
-            visi_vector.erase(it, visi_vector.end());
+            // vargšiukai yra nuo partitionPoint iki galo
+            std::vector<Studentas> vargsiukai(partitionPoint, visi_vector.end());
+
+            // pašaliname vargšus iš vector
+            visi_vector.erase(partitionPoint, visi_vector.end());
+
+                if (pagal_vid_ar_med == 1) {  // pagal vidurkį
+        std::sort(visi_vector.begin(), visi_vector.end(),
+                  [](const Studentas& a, const Studentas& b){ return a.vid > b.vid; });
+        std::sort(vargsiukai.begin(), vargsiukai.end(),
+                  [](const Studentas& a, const Studentas& b){ return a.vid > b.vid; });
+    } else {  // pagal medianą
+        std::sort(visi_vector.begin(), visi_vector.end(),
+                  [](const Studentas& a, const Studentas& b){ return a.med > b.med; });
+        std::sort(vargsiukai.begin(), vargsiukai.end(),
+                  [](const Studentas& a, const Studentas& b){ return a.med > b.med; });
+    }
 
             if (rikiuotiPagal == 2) {
-                std::sort(vargsiukai.begin(), vargsiukai.end(),
-                    [](const Studentas& a, const Studentas& b) { return a.pav < b.pav; });
-                std::sort(visi_vector.begin(), visi_vector.end(),
-                    [](const Studentas& a, const Studentas& b) { return a.pav < b.pav; });
+                auto cmp = [](const Studentas& a, const Studentas& b){ return a.pav < b.pav; };
+                std::sort(visi_vector.begin(), visi_vector.end(), cmp);   // kietiakiai
+                std::sort(vargsiukai.begin(), vargsiukai.end(), cmp);     // vargšai
             }
 
             irasyti_i_faila(vargsiukai, "vargsiukai.txt");
             irasyti_i_faila(visi_vector, "kietiakiai.txt");
         }
+
     }
     else {
         if (strategija == 1) {
@@ -258,6 +311,8 @@ void StudentuGrupe::skirstyti_studentus(int pagal_vid_ar_med, int rikiuotiPagal,
             irasyti_i_faila(visi_list, "kietiakiai.txt");
         }
     }
+
+
 
     std::cout << "Rezultatai issaugoti i failus: vargsiukai.txt ir kietiakiai.txt" << std::endl;
 }

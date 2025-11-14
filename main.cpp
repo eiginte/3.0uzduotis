@@ -10,7 +10,7 @@ using std::string;
 int main() {
 
     int strategija;
-    cout << "Pasirinkite strategija (1 - du konteineriai, 2 - vienas su trynimais): ";
+    cout << "Pasirinkite strategija (1 - du konteineriai, 2 - vienas su trynimais, 3 - partition (vector)): ";
     cin >> strategija;
 
     cout << "Pasirinkite konteineri:\n"
