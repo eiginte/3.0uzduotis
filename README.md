@@ -222,6 +222,12 @@ Jei pasirenkame 1-3 variantus, toliau renkames pagal ką norime skirstyti studen
 Tuomet pasirenkame, ar norime, jog jie būtų surūšiuoti pagal pavardę, ar ne.
 Programai sekmingai suveikus matome, kokiuose failuose išsaugoti studentų duomenys.
 
+Releasų aprašymas:
+v.pradinė - programoje duomenys nuskaitomi iš failo, o ne vedami ranka.
+v0.1 - Galima pasirinkti, ar norime studentus įvesti patys, ar sugeneruoti juos, ar nuskaityti iš failo. Taip pat galima pasirinkti, ar norime matyti vidurkį, ar medianą, ar abu. Dalis pirmųjų rezultatų išvedami komandinėje eilutėje, pagal vardus abėcėlės tvarka. Visi rezultatai pagal abėcėlę yra išvedami į atskirą failą "rezultatai.txt".
+v.02 - studentai skirstomi į dvi grupes: kietiakai (balas >=5) ir vargšiukai (balas <5), suskirsčius į grupes programos naudotojas gali pasirinkti, ar nori, jog studentai būtų rūšiuojami pagal medianą ar vidurkį, ar pagal pavardę.
+v0.3 - Kode galima pasirinkti, ar naudojama std::vector ar std::list; readme faile matomi testavimo laiko rezultatai, kuriuose galima palyginti ar list, ar vector veikia greičiau (testavimai daryti su failais iš 1000, 10000, 100000, 1000000, 10000000 įrašų, po kelis kartus, yra pateiktas vidurkis).
+
 
 
 
