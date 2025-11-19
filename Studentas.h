@@ -2,40 +2,43 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 class Studentas {
 private:
     std::string vardas_;
     std::string pavarde_;
-    double egzaminas_{0};
-    std::vector<double> nd_;
-    double vid_{0};
-    double med_{0};
+    std::vector<int> paz_;
+    int egzas_;
+    double vid_;
+    double med_;
+    double galBalas(double (*funkcija)(std::vector<double>) = nullptr) const;
 
-    void skaiciuoti_rezultatus();
-    double skaiciuotiMediana(std::vector<double> paz) const;
+
+    // pagalbinė funkcija medianai
+    double skaiciuoti_mediana(std::vector<int> paz) const;
 
 public:
-    Studentas() = default;
-    Studentas(std::istream& is);
-    std::istream& readStudent(std::istream& is);
+    // konstruktoriai
+    Studentas() : egzas_(0), vid_(0), med_(0) { }
+    Studentas(std::istream& is) { readStudent(is); }
 
-    std::string vardas() const { return vardas_; }
-    std::string pavarde() const { return pavarde_; }
-    double egzas() const { return egzaminas_; }
-    std::vector<double> nd() const { return nd_; }
-    double vid() const { return vid_; }
-    double med() const { return med_; }
+    // get'eriai
+    inline std::string vardas() const { return vardas_; }
+    inline std::string pavarde() const { return pavarde_; }
+    inline int egzas() const { return egzas_; }
+    inline double vidurkis() const { return vid_; }
+    inline double mediana() const { return med_; }
+    inline std::vector<int> pazymiai() const { return paz_; }
 
-    void setVard(const std::string& v) { vardas_ = v; }
-    void setPav(const std::string& p) { pavarde_ = p; }
-    void setPaz(const std::vector<double>& nd) { nd_ = nd; skaiciuoti_rezultatus(); }
-    void setEgzas(double e) { egzaminas_ = e; skaiciuoti_rezultatus(); }
+    // metodas rezultatams skaiciuoti
+    void skaiciuoti_rezultatus();
 
-    double galBalas(double (*skaiciuotiMedianaFunc)(std::vector<double>) = nullptr) const;
+    // set'eriai / read'is
+    std::istream& readStudent(std::istream&);
 };
 
-bool compare(const Studentas& a, const Studentas& b);
-bool comparePagalPavarde(const Studentas& a, const Studentas& b);
-bool comparePagalEgza(const Studentas& a, const Studentas& b);
 
+bool compare(const Studentas&, const Studentas&);
+bool comparePagalPavarde(const Studentas&, const Studentas&);
+bool comparePagalEgza(const Studentas&, const Studentas&);
