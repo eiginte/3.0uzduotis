@@ -44,13 +44,12 @@ std::istream& Studentas::readStudent(std::istream& is) {
     is >> vardas_ >> pavarde_;
 
     int paz;
-    // Skaitome visus ND iki tol, kol randame egzamino lauką
     while (is >> paz) {
-        if (paz < 0 || paz > 10) break;   // egzamino vieta
+        if (paz < 0 || paz > 10) break;   
         paz_.push_back(paz);
     }
 
-    egzas_ = paz;  // paskutinis nuskaitytas yra egzamino balas
+    egzas_ = paz; 
 
     skaiciuoti_rezultatus();
     return is;
@@ -69,3 +68,4 @@ bool comparePagalPavarde(const Studentas& a, const Studentas& b) {
 bool comparePagalEgza(const Studentas& a, const Studentas& b) {
     return a.egzas() < b.egzas();
 }
+
