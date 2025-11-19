@@ -4,7 +4,6 @@ SSD: 512 GB Lexar NM620 PCIe NVMe SSD
 
 ------------TREČIOJI STRATEGIJA-------------
 
-
 ------NAUDOJAME O1:----------
 
 NAUDOJANT STRUCT:
@@ -49,8 +48,8 @@ NAUDOJANT CLASS:
 
 
 ------NAUDOJAME O2:----------
-NAUDOJANT STRUCT:
 
+NAUDOJANT STRUCT:
 .exe failo dydis: 3 076 KB
 
 | Įrašų  skaičius | Konteineris | Nuskaitymas (s) | Skirstymas (s) | Įrašymas (s) | Iš viso:  |
