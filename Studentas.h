@@ -12,11 +12,7 @@ private:
     int egzas_;
     double vid_;
     double med_;
-
-    // pagalbinė funkcija medianai
     double skaiciuoti_mediana(std::vector<int> paz) const;
-
-    // galutinio balo skaičiavimo funkcija
     double galBalas(double (*funkcija)(std::vector<double>) = nullptr) const;
 
 public:
@@ -52,7 +48,7 @@ public:
                   << other.vardas_ << " " << other.pavarde_ << "\n";
     }
 
-    // COPY ASSIGNMENT
+    //COPY ASSIGNMENT
     Studentas& operator=(const Studentas& other) {
         if (this != &other) {
             std::cout << "[COPY ASSIGN] Priskiriamas studentas: "
@@ -68,7 +64,7 @@ public:
         return *this;
     }
 
-    // DESTRUCTOR
+    //DESTRUCTOR
     ~Studentas() {
         std::cout << "[DESTRUCTOR] Naikinamas studentas: "
                   << vardas_ << " " << pavarde_ << "\n";
@@ -83,10 +79,7 @@ public:
     inline double mediana() const { return med_; }
     inline std::vector<int> pazymiai() const { return paz_; }
 
-    // rezultatų skaičiavimas
     void skaiciuoti_rezultatus();
-
-    // skaitymas iš srauto
     std::istream& readStudent(std::istream&);
 };
 
@@ -95,3 +88,4 @@ public:
 bool compare(const Studentas&, const Studentas&);
 bool comparePagalPavarde(const Studentas&, const Studentas&);
 bool comparePagalEgza(const Studentas&, const Studentas&);
+
