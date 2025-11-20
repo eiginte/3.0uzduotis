@@ -20,32 +20,44 @@ private:
     double galBalas(double (*funkcija)(std::vector<double>) = nullptr) const;
 
 public:
-
     Studentas()
-        : vardas_(), pavarde_(), paz_(), egzas_(0), vid_(0), med_(0) {}
+        : vardas_(), pavarde_(), paz_(), egzas_(0), vid_(0), med_(0)
+    {
+        std::cout << "[DEFAULT CTOR] Sukurtas tuscias studentas\n";
+    }
 
     Studentas(const std::string& vard, const std::string& pav,
               const std::vector<int>& paz, int egzas)
         : vardas_(vard), pavarde_(pav), paz_(paz), egzas_(egzas)
     {
         skaiciuoti_rezultatus();
+        std::cout << "[PARAMETRIZED CTOR] Sukurtas studentas " << vardas_ << "\n";
     }
 
     Studentas(std::istream& is) {
+        std::cout << "[STREAM CTOR] Kuriamas studentas is srauto\n";
         readStudent(is);
     }
 
+    //COPY CONSTRUCTOR
     Studentas(const Studentas& other)
         : vardas_(other.vardas_),
           pavarde_(other.pavarde_),
           paz_(other.paz_),
           egzas_(other.egzas_),
           vid_(other.vid_),
-          med_(other.med_) {}
+          med_(other.med_)
+    {
+        std::cout << "[COPY CTOR] Kopijuojamas studentas: "
+                  << other.vardas_ << " " << other.pavarde_ << "\n";
+    }
 
-
+    // COPY ASSIGNMENT
     Studentas& operator=(const Studentas& other) {
         if (this != &other) {
+            std::cout << "[COPY ASSIGN] Priskiriamas studentas: "
+                      << other.vardas_ << " " << other.pavarde_ << "\n";
+
             vardas_ = other.vardas_;
             pavarde_ = other.pavarde_;
             paz_ = other.paz_;
@@ -56,9 +68,11 @@ public:
         return *this;
     }
 
-
-
-    ~Studentas() = default; // std::string ir std::vector išvalo patys
+    // DESTRUCTOR
+    ~Studentas() {
+        std::cout << "[DESTRUCTOR] Naikinamas studentas: "
+                  << vardas_ << " " << pavarde_ << "\n";
+    }
 
 
     // GET'ERIAI

@@ -3,6 +3,7 @@
 #include <windows.h>
 #include <sstream>
 #include <vector>
+#include <algorithm>
 
 using std::cout;
 using std::cin;
@@ -83,6 +84,8 @@ s.readStudent(iss);
         return 0;
     }
 
+
+
     cout << "Skirstyti pagal (1 - vidurki, 2 - mediana): ";
     int pagal; cin >> pagal;
 
@@ -91,6 +94,9 @@ s.readStudent(iss);
     cin >> rikiuotiPagal;
 
     grupe.skirstyti_studentus(pagal, rikiuotiPagal, strategija);
+
+
+
 
     return 0;
 }
