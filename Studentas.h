@@ -13,8 +13,10 @@ private:
     double vid_;
     double med_;
 
+    // pagalbinė funkcija medianai
     double skaiciuoti_mediana(std::vector<int> paz) const;
 
+    // galutinio balo skaičiavimo funkcija
     double galBalas(double (*funkcija)(std::vector<double>) = nullptr) const;
 
 public:
@@ -41,13 +43,6 @@ public:
           vid_(other.vid_),
           med_(other.med_) {}
 
-    Studentas(Studentas&& other) noexcept
-        : vardas_(std::move(other.vardas_)),
-          pavarde_(std::move(other.pavarde_)),
-          paz_(std::move(other.paz_)),
-          egzas_(other.egzas_),
-          vid_(other.vid_),
-          med_(other.med_) {}
 
     Studentas& operator=(const Studentas& other) {
         if (this != &other) {
@@ -61,23 +56,12 @@ public:
         return *this;
     }
 
-    Studentas& operator=(Studentas&& other) noexcept {
-        if (this != &other) {
-            vardas_ = std::move(other.vardas_);
-            pavarde_ = std::move(other.pavarde_);
-            paz_ = std::move(other.paz_);
-            egzas_ = other.egzas_;
-            vid_ = other.vid_;
-            med_ = other.med_;
-        }
-        return *this;
-    }
 
 
+    ~Studentas() = default; // std::string ir std::vector išvalo patys
 
-    ~Studentas() = default; 
 
-
+    // GET'ERIAI
     inline std::string vardas() const { return vardas_; }
     inline std::string pavarde() const { return pavarde_; }
     inline int egzas() const { return egzas_; }
@@ -85,9 +69,10 @@ public:
     inline double mediana() const { return med_; }
     inline std::vector<int> pazymiai() const { return paz_; }
 
-
+    // rezultatų skaičiavimas
     void skaiciuoti_rezultatus();
 
+    // skaitymas iš srauto
     std::istream& readStudent(std::istream&);
 };
 
@@ -96,4 +81,3 @@ public:
 bool compare(const Studentas&, const Studentas&);
 bool comparePagalPavarde(const Studentas&, const Studentas&);
 bool comparePagalEgza(const Studentas&, const Studentas&);
-
