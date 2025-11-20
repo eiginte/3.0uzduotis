@@ -2,6 +2,59 @@ CPU: Intel Core i5-10210U, 10-oji karta, 4 branduoliai / 8 gijos, 1.6 GHz bazini
 RAM: 16 GB DDR4-2400 MHz (2 × 8 GB, Hynix)
 SSD: 512 GB Lexar NM620 PCIe NVMe SSD
 
+
+
+1.2 versijoje kodas nepraranda savo funkcijų, yra naudojama rule of 3. 
+
+Duomenų įvestis:
+
+rankiniu būdu - Naudotojas tiesiogiai įveda studento vardą, pavardę, namų darbų pažymius ir egzamino balą per konsolę (cin). Kiekvienam studentui sukuriamas laikinas objektas Studentas s, užpildomas duomenimis, tada dedamas į grupę (grupe.prideti_studenta(s)).
+<img width="806" height="812" alt="image" src="https://github.com/user-attachments/assets/8a0cd48e-bc60-4432-b416-8af4f73617f4" />
+
+
+
+
+automatiniu - Metodas StudentuGrupe::generuoti_studentus(int kiek, int nd_sk) sugeneruoja atsitiktinius studentus. Studentai su random vardais/pavardėmis ir namų darbų pažymiais yra įdedami į grupę.
+<img width="854" height="593" alt="image" src="https://github.com/user-attachments/assets/2a832d82-cdf1-4332-8e55-f2f015291d00" />
+
+
+iš failo - Metodas StudentuGrupe::skaityti_is_failo(const std::string& failas) skaito studentų duomenis CSV ar txt formato failo eilutėmis. Kiekviena eilutė interpretuojama per Studentas::readStudent(std::istream&).
+
+<img width="929" height="940" alt="image" src="https://github.com/user-attachments/assets/078310f3-8f40-4dee-99a4-833ea9552c19" />
+
+<img width="785" height="439" alt="image" src="https://github.com/user-attachments/assets/fdf583a9-fa24-4023-9f7a-6d1853e511d6" />
+
+
+Studentas turi konstruktorius su skirtingais parametrais:
+Studentas() – tuščias studentas;
+Studentas(const std::string&, const std::string&, const std::vector<int>&, int) – parametrizuotas;
+Studentas(std::istream&) – įvedimas iš srauto.
+
+Duomenų išvestis:
+į failą: 
+StudentuGrupe turi du perdengtus metodus irasyti_i_faila:
+  irasyti_i_faila(const std::vector<Studentas>&, const std::string&) – išveda į failą, kai studentai saugomi vector konteineryje;
+  irasyti_i_faila(const std::list<Studentas>&, const std::string&) – išveda į failą, kai studentai saugomi list konteineryje.
+
+Išvestis į ekraną:
+Ekrane rodomi tik svarbiausi pranešimai, pvz.:
+[DEFAULT CTOR] Sukurtas tuscias studentas
+[COPY CTOR] Kopijuojamas studentas: ...
+[DESTRUCTOR] Naikinamas studentas: ...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ------------TREČIOJI STRATEGIJA-------------
 
 ------NAUDOJAME O1:----------
@@ -124,44 +177,5 @@ NAUDOJANT CLASS:
 |                 |             | 24.0875 | 26.0397 | 15.1634 | 65.2906 |
 |                 | Vidurkis:   |     23.2332 |   26.0198   | 15.1473      |  64.4003  |
 
-
-
-1.2 versijoje kodas nepraranda savo funkcijų, yra naudojama rule of 3. 
-
-Duomenų įvestis:
-
-rankiniu būdu - Naudotojas tiesiogiai įveda studento vardą, pavardę, namų darbų pažymius ir egzamino balą per konsolę (cin). Kiekvienam studentui sukuriamas laikinas objektas Studentas s, užpildomas duomenimis, tada dedamas į grupę (grupe.prideti_studenta(s)).
-<img width="806" height="812" alt="image" src="https://github.com/user-attachments/assets/8a0cd48e-bc60-4432-b416-8af4f73617f4" />
-
-
-
-
-automatiniu - Metodas StudentuGrupe::generuoti_studentus(int kiek, int nd_sk) sugeneruoja atsitiktinius studentus. Studentai su random vardais/pavardėmis ir namų darbų pažymiais yra įdedami į grupę.
-<img width="854" height="593" alt="image" src="https://github.com/user-attachments/assets/2a832d82-cdf1-4332-8e55-f2f015291d00" />
-
-
-iš failo - Metodas StudentuGrupe::skaityti_is_failo(const std::string& failas) skaito studentų duomenis CSV ar txt formato failo eilutėmis. Kiekviena eilutė interpretuojama per Studentas::readStudent(std::istream&).
-
-<img width="929" height="940" alt="image" src="https://github.com/user-attachments/assets/078310f3-8f40-4dee-99a4-833ea9552c19" />
-
-<img width="785" height="439" alt="image" src="https://github.com/user-attachments/assets/fdf583a9-fa24-4023-9f7a-6d1853e511d6" />
-
-
-Studentas turi konstruktorius su skirtingais parametrais:
-Studentas() – tuščias studentas;
-Studentas(const std::string&, const std::string&, const std::vector<int>&, int) – parametrizuotas;
-Studentas(std::istream&) – įvedimas iš srauto.
-
-Duomenų išvestis:
-į failą: 
-StudentuGrupe turi du perdengtus metodus irasyti_i_faila:
-  irasyti_i_faila(const std::vector<Studentas>&, const std::string&) – išveda į failą, kai studentai saugomi vector konteineryje;
-  irasyti_i_faila(const std::list<Studentas>&, const std::string&) – išveda į failą, kai studentai saugomi list konteineryje.
-
-Išvestis į ekraną:
-Ekrane rodomi tik svarbiausi pranešimai, pvz.:
-[DEFAULT CTOR] Sukurtas tuscias studentas
-[COPY CTOR] Kopijuojamas studentas: ...
-[DESTRUCTOR] Naikinamas studentas: ...
 
 
