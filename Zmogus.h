@@ -9,7 +9,7 @@ protected:
 public:
     // rule of 3
 
-    // custom destructor (virtual, privalomas paveldëjimui)
+    // custom destructor (virtual, privalomas paveldejimui)
     virtual ~Zmogus() {}
 
     // copy constructor
@@ -38,3 +38,4 @@ public:
     //abstrakti
     virtual void isvesti() const = 0;
 };
+
