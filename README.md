@@ -2,6 +2,11 @@ CPU: Intel Core i5-10210U, 10-oji karta, 4 branduoliai / 8 gijos, 1.6 GHz bazini
 RAM: 16 GB DDR4-2400 MHz (2 × 8 GB, Hynix)
 SSD: 512 GB Lexar NM620 PCIe NVMe SSD
 
+1.5 VERSIJA
+Vietoj klasės Studentas sukurtos dvi klasės, bazinė abstrakti klasė Zmogus, kurioje aprašome žmogų (t.y. vardą ir pavardę) ir iš jos sukūrėmė išvestinę klasę Studentas, kuroje liko likusieji dalykai, kaip 1.2 versijoje Studentas klasėje.
+
+Bazinė klasė Zmogus padaryta abstrakčia, nes turi gryną virtualią funkciją isvesti(), dėl to tiesiogiai sukurti Zmogus objekto neįmanoma – galima kurti tik iš jos paveldėtas klases, pvz., Studentas, kurios įgyvendina šią funkciją.
+
 
 
 1.2 versijoje kodas nepraranda savo funkcijų, yra naudojama rule of 3. 
