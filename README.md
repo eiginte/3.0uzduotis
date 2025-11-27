@@ -7,6 +7,13 @@ Vietoj klasės Studentas sukurtos dvi klasės, bazinė abstrakti klasė Zmogus, 
 
 Bazinė klasė Zmogus padaryta abstrakčia, nes turi gryną virtualią funkciją isvesti(), dėl to tiesiogiai sukurti Zmogus objekto neįmanoma – galima kurti tik iš jos paveldėtas klases, pvz., Studentas, kurios įgyvendina šią funkciją.
 
+DEMONSTRACIJA:
+Demonstracijoje parodyta, kad bandymas sukurti tiesioginį Zmogus objektą būtų neįmanomas
+(negalime kompiliuoti),
+<img width="1294" height="400" alt="image" src="https://github.com/user-attachments/assets/752a9c65-1c55-407a-b647-8ce7868a2a47" />
+
+o vietoj to sukuriamas Studentas objektas, kuris paveldi iš Zmogus ir įgyvendina abstrakčią funkciją isvesti(). Tai vizualiai parodo, kad bazinė klasė veikia kaip abstrakti.
+<img width="1322" height="190" alt="image" src="https://github.com/user-attachments/assets/d6f2dbc1-64c6-4664-8e8c-e454a7ae056b" />
 
 
 1.2 versijoje kodas nepraranda savo funkcijų, yra naudojama rule of 3. 
