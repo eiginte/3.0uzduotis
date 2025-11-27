@@ -12,6 +12,19 @@ using std::string;
 
 int main() {
 
+
+// abstrakcios klases zmogus dmonstracija
+    //Zmogus z; // nuimam koentara ir matom, kad nekompiliuoja
+    // nes zmogus turi abstrakèià funkcija isvesti()
+    // irodo, kad klase zmogus yra abstrakti
+
+    Studentas demo("Jonas", "Jonaitis", {8, 9, 10}, 9);
+    Zmogus* ptr = &demo;   // galima naudoti per abstrakcios klases pointeri
+    cout << "Demonstracija per abstrakcios klases pointeri:\n";
+    ptr->isvesti();        // iskvieèia Studentas::isvesti()
+
+
+
     int strategija;
     cout << "Pasirinkite strategija (1 - du konteineriai, 2 - vienas su trynimais, 3 - partition (vector)): ";
     cin >> strategija;
