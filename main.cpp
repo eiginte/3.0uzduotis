@@ -15,13 +15,13 @@ int main() {
 
 // abstrakcios klases zmogus dmonstracija
     //Zmogus z; // nuimam koentara ir matom, kad nekompiliuoja
-    // nes zmogus turi abstrakèià funkcija isvesti()
+    // nes zmogus turi abstrakÃ¨iÃ  funkcija isvesti()
     // irodo, kad klase zmogus yra abstrakti
 
     Studentas demo("Jonas", "Jonaitis", {8, 9, 10}, 9);
     Zmogus* ptr = &demo;   // galima naudoti per abstrakcios klases pointeri
     cout << "Demonstracija per abstrakcios klases pointeri:\n";
-    ptr->isvesti();        // iskvieèia Studentas::isvesti()
+    ptr->isvesti();        // iskviecia Studentas::isvesti()
 
 
 
@@ -113,4 +113,5 @@ s.readStudent(iss);
 
     return 0;
 }
+
 
