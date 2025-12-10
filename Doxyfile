@@ -1,0 +1,16 @@
+DOXYFILE_ENCODING      = UTF-8
+PROJECT_NAME           = "Studentų rūšiavimas"
+PROJECT_NUMBER = 2.0
+PROJECT_BRIEF          = "Studentų nuskaitymas, generavimas bei rūšiavimas pagal naudotojo pasirinkimus."
+OUTPUT_DIRECTORY = docs
+FILE_PATTERNS = *.cpp *.h
+GENERATE_HTML = YES
+GENERATE_LATEX = NO
+GENERATE_XML = NO
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+
+
+
+
