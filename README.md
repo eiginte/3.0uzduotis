@@ -7,8 +7,6 @@ Testavimas atliktas su Google Test biblioteka
 Testai aprašomi daile test.cpp. Naudojamos dvi testų grupės (test suites):
 "StudentuGrupeTests" testuoja "StudentuGrupe" struktūros f-jos tikrina studentų pridėjimą į grupę ("prideti_studenta"), ar studentas tinkamai įrašomas į vektorių ir ar jo vardas bei pavardė teisingai saugomi.
 "StudentasTestas" tikrina studentų rikiavimą pagal pavardę ("RikiuojaPagalPavarde"), tikrina studentų rikiavimą pagal vardą ("RikiuojaPagalVardą").
-Vidurkio funkcija ("vidurkis")
-Pateikta kaip pavyzdinė pagalbinė funkcija, kuri apskaičiuoja pažymių vidurkį.
 Išjungtas konstruktorių/destruktorių logavimas, testo "main" funkcijoje "std::cout" nukreipiamas į "nullptr", kad testų metu nebūtų matomi konstruktoriai, kopijavimo ar destruktorių pranešimai. Tai padeda išlaikyti testų rezultatų konsolės išvestį švarią.
 
 Kompiliavimas (Windows pavyzdys su g++):
