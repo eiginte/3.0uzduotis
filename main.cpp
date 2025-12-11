@@ -1,3 +1,12 @@
+/**
+ * @file main.cpp
+ * @brief Programos įėjimo taškas ir Studentų demonstracijos
+ *
+ * Šiame faile vykdoma Studentas klasės ir StudentuGrupe funkcijų demonstracija.
+ * Demonstracija apima abstrakčios klasės Zmogus naudojimą, studentų generavimą,
+ * įvedimą iš failo, išvestį į failą, skirstymą pagal vidurkį/medianą,
+ * bei pasirinkimą konteinerio tipo (vector arba list) ir strategijos.
+ */
 #include <iostream>
 #include "StudentuGrupe.h"
 #include <windows.h>
@@ -10,18 +19,34 @@ using std::cin;
 using std::endl;
 using std::string;
 
+/**
+ * @brief Pagrindinė programos funkcija
+ *
+ * Funkcija vykdo Studentų demonstracijas pagal vartotojo pasirinkimus:
+ * - Abstrakčios klasės demonstracija
+ * - Studentų įvedimas ranka
+ * - Atsitiktinių studentų generavimas
+ * - Skaitymas iš failo
+ * - Failo sugeneravimas su studentų duomenimis
+ * - Studentų skirstymas pagal vidurkį arba medianą
+ * - Pasirinkimas rikiuoti pagal pavardę
+ *
+ * @return int Grąžina 0 pavykus programos vykdymui
+ */
+
 int main() {
 
 
-// abstrakcios klases zmogus dmonstracija
+    // abstrakcios klases zmogus dmonstracija
     //Zmogus z; // nuimam koentara ir matom, kad nekompiliuoja
     // nes zmogus turi abstrakèià funkcija isvesti()
     // irodo, kad klase zmogus yra abstrakti
 
     Studentas demo("Jonas", "Jonaitis", {8, 9, 10}, 9);
-    Zmogus* ptr = &demo;   // galima naudoti per abstrakcios klases pointeri
+    Zmogus* ptr = &demo;   /**< Naudojimas per abstrakčios klasės pointerį */
     cout << "Demonstracija per abstrakcios klases pointeri:\n";
-    ptr->isvesti();        // iskviecia Studentas::isvesti()
+    ptr->isvesti();         /**< Iškviečia Studentas::isvesti() per bazinę klasę */
+
 
 
 
@@ -48,6 +73,7 @@ int main() {
     cin >> pasirinkimas;
 
     if (pasirinkimas == 1) {
+        /**< Rankinis studentų įvedimas */
         int kiek;
         cout << "Kiek studentu ivesti? ";
         cin >> kiek;
@@ -77,17 +103,20 @@ s.readStudent(iss);
         }
     }
     else if (pasirinkimas == 2) {
+        /**< Atsitiktinių studentų generavimas */
         int kiek, nd_sk;
         cout << "Kiek studentu generuoti? "; cin >> kiek;
         cout << "Kiek ND pazymiu? "; cin >> nd_sk;
         grupe.generuoti_studentus(kiek, nd_sk);
     }
     else if (pasirinkimas == 3) {
+        /**< Studentų nuskaitymas iš failo */
         string failas;
         cout << "Iveskite failo pavadinima: "; cin >> failas;
         grupe.skaityti_is_failo(failas);
     }
     else if (pasirinkimas == 4) {
+        /**< Failo generavimas su studentų duomenimis */
         int kiek, nd_sk;
         string failas;
         cout << "Failo pavadinimas: "; cin >> failas;
@@ -98,7 +127,7 @@ s.readStudent(iss);
     }
 
 
-
+    /**< Studentų skirstymas pagal vartotojo pasirinkimą */
     cout << "Skirstyti pagal (1 - vidurki, 2 - mediana): ";
     int pagal; cin >> pagal;
 
@@ -113,5 +142,4 @@ s.readStudent(iss);
 
     return 0;
 }
-
 

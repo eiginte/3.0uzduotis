@@ -1,3 +1,16 @@
+/**
+ * @file StudentuGrupe.cpp
+ * @brief StudentuGrupe struktūros funkcijų įgyvendinimas
+ *
+ * Šiame faile įgyvendintos StudentuGrupe funkcijos:
+ * - pridėti studentą
+ * - skaityti iš failo
+ * - generuoti studentus
+ * - generuoti failą
+ * - įrašyti į failą
+ * - skirstyti studentus pagal vidurkį/medianą
+ */
+
 #include "StudentuGrupe.h"
 #include <iostream>
 #include <fstream>
@@ -22,6 +35,12 @@ using std::mt19937;
 using std::uniform_int_distribution;
 using std::list;
 
+
+/**
+ * @brief Prideda studentą į grupę
+ * @param s Studentas objektas
+ * @return const Studentas* Adresas konteineryje, kuriame saugomas studentas
+ */
 const Studentas* StudentuGrupe::prideti_studenta(const Studentas& s) {
     if (naudotiVector) {
         visi_vector.push_back(s);
@@ -32,6 +51,10 @@ const Studentas* StudentuGrupe::prideti_studenta(const Studentas& s) {
     }
 }
 
+/**
+ * @brief Skaito studentus iš failo
+ * @param failas Failo pavadinimas
+ */
 void StudentuGrupe::skaityti_is_failo(const string& failas) {
     ifstream in(failas);
     if (!in) {
@@ -52,6 +75,11 @@ void StudentuGrupe::skaityti_is_failo(const string& failas) {
     }
 }
 
+/**
+ * @brief Generuoja atsitiktinius studentus
+ * @param kiek Kiek studentų sugeneruoti
+ * @param nd_sk Kiek namų darbų pažymių generuoti kiekvienam studentui
+ */
 void StudentuGrupe::generuoti_studentus(int kiek, int nd_sk) {
     random_device rd;
     mt19937 gen(rd());
@@ -78,6 +106,13 @@ s.readStudent(iss);
     }
 }
 
+
+/**
+ * @brief Generuoja failą su atsitiktiniais studentais
+ * @param failas Failo pavadinimas
+ * @param kiek Kiek studentų sugeneruoti
+ * @param nd_sk Kiek namų darbų pažymių generuoti kiekvienam studentui
+ */
 void StudentuGrupe::generuoti_faila(const string& failas, int kiek, int nd_sk) {
     ofstream out(failas);
     if (!out) { cout << "Nepavyko sukurti failo: " << failas << endl; return; }
@@ -99,6 +134,11 @@ void StudentuGrupe::generuoti_faila(const string& failas, int kiek, int nd_sk) {
     cout << "Failas \"" << failas << "\" sugeneruotas." << endl;
 }
 
+/**
+ * @brief Įrašo studentus į failą (vector)
+ * @param grupe Vektorius studentų
+ * @param failas Failo pavadinimas
+ */
 void StudentuGrupe::irasyti_i_faila(const vector<Studentas>& grupe, const std::string& failas) {
     ofstream out(failas);
     if (!out) { cout << "Nepavyko sukurti failo: " << failas << endl; return; }
@@ -115,6 +155,11 @@ void StudentuGrupe::irasyti_i_faila(const vector<Studentas>& grupe, const std::s
     }
 }
 
+/**
+ * @brief Įrašo studentus į failą (list)
+ * @param grupe Sąrašas studentų
+ * @param failas Failo pavadinimas
+ */
 void StudentuGrupe::irasyti_i_faila(const list<Studentas>& grupe, const std::string& failas) {
     ofstream out(failas);
     if (!out) { cout << "Nepavyko sukurti failo: " << failas << endl; return; }
@@ -131,6 +176,12 @@ void StudentuGrupe::irasyti_i_faila(const list<Studentas>& grupe, const std::str
     }
 }
 
+/**
+ * @brief Skirsto studentus pagal galutinį vidurkį arba medianą
+ * @param pagal_vid_ar_med 1 - skirstyti pagal vidurkį, 2 - pagal medianą
+ * @param rikiuotiPagal 1 - ne, 2 - rikiuoti pagal pavardę
+ * @param strategija 1 - du konteineriai, 2 - vienas su trynimais, 3 - partition (vector)
+ */
 void StudentuGrupe::skirstyti_studentus(int pagal_vid_ar_med, int rikiuotiPagal, int strategija) {
     if (naudotiVector) {
         std::vector<Studentas> kietiakiai, vargsiukai;
