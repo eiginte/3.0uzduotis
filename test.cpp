@@ -6,16 +6,7 @@
 
 
 
-// Paprasta vidurkio funkcija
-double vidurkis(const std::vector<double>& paz) {
-    if (paz.empty()) return 0.0;
-    double suma = 0;
-    for (double x : paz) suma += x;
-    return suma / paz.size();
-}
-
-
-// Testas studentø pridëjimui á grupæ
+// Testas studenti pridejimui i grupe
 TEST(StudentuGrupeTests, PridedaStudenta) {
     StudentuGrupe g;
     g.naudotiVector = true;
@@ -29,7 +20,7 @@ TEST(StudentuGrupeTests, PridedaStudenta) {
     ASSERT_EQ(g.visi_vector[0].pavarde(), "Onute");
 }
 
-// Testas rikiavimo pagal pavardæ
+// Testas rikiavimo pagal pavarde
 TEST(StudentasTests, RikiuojaPagalPavarde) {
     std::vector<Studentas> v = {
         Studentas("Jonas", "Bbb", {}, 0),
@@ -44,7 +35,7 @@ TEST(StudentasTests, RikiuojaPagalPavarde) {
     ASSERT_EQ(v[1].pavarde(), "Bbb");
 }
 
-// Testas rikiavimo pagal vardà
+// Testas rikiavimo pagal varda
 TEST(StudentasTests, RikiuojaPagalVarda) {
     std::vector<Studentas> v = {
         Studentas("Jonas", "Bbb", {}, 0),
@@ -62,14 +53,15 @@ TEST(StudentasTests, RikiuojaPagalVarda) {
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
 
-    // Nukreipiame cout á "niekur", kad nesimatytø konstruktor/destruktoriø logø
+    // Nukreipiame cout i "niekur", kad nesimatytu konstruktor/destruktoriu logu
     std::streambuf* oldCout = std::cout.rdbuf();
     std::cout.rdbuf(nullptr);
 
     int result = RUN_ALL_TESTS();
 
-    // Gràþinam cout atgal (nebûtina, bet tvarkingiau)
+    // GrÃ Ã¾inam cout atgal (nebÃ»tina, bet tvarkingiau)
     std::cout.rdbuf(oldCout);
 
     return result;
 }
+
