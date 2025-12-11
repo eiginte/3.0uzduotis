@@ -2,6 +2,25 @@ CPU: Intel Core i5-10210U, 10-oji karta, 4 branduoliai / 8 gijos, 1.6 GHz bazini
 RAM: 16 GB DDR4-2400 MHz (2 × 8 GB, Hynix)
 SSD: 512 GB Lexar NM620 PCIe NVMe SSD
 
+2.0 versija:
+Testavimas atliktas su Google Test biblioteka
+Testai aprašomi daile test.cpp. Naudojamos dvi testų grupės (test suites):
+"StudentuGrupeTests" testuoja "StudentuGrupe" struktūros f-jos tikrina studentų pridėjimą į grupę ("prideti_studenta"), ar studentas tinkamai įrašomas į vektorių ir ar jo vardas bei pavardė teisingai saugomi.
+"StudentasTestas" tikrina studentų rikiavimą pagal pavardę ("RikiuojaPagalPavarde"), tikrina studentų rikiavimą pagal vardą ("RikiuojaPagalVardą").
+Vidurkio funkcija ("vidurkis")
+Pateikta kaip pavyzdinė pagalbinė funkcija, kuri apskaičiuoja pažymių vidurkį.
+Išjungtas konstruktorių/destruktorių logavimas, testo "main" funkcijoje "std::cout" nukreipiamas į "nullptr", kad testų metu nebūtų matomi konstruktoriai, kopijavimo ar destruktorių pranešimai. Tai padeda išlaikyti testų rezultatų konsolės išvestį švarią.
+
+Kompiliavimas (Windows pavyzdys su g++):
+g++ -std=c++17 test.cpp Studentas.cpp StudentuGrupe.cpp googletest/src/gtest-all.cc -I googletest/include -I googletest -o tests.exe
+
+ir tada paleidžiame testus:
+.\tests.exe
+
+gauname:
+<img width="1906" height="491" alt="image" src="https://github.com/user-attachments/assets/99f18001-22d6-4939-aa36-a32f1e86fe57" />
+
+
 1.5 VERSIJA
 Vietoj klasės Studentas sukurtos dvi klasės, bazinė abstrakti klasė Zmogus, kurioje aprašome žmogų (t.y. vardą ir pavardę) ir iš jos sukūrėmė išvestinę klasę Studentas, kuroje liko likusieji dalykai, kaip 1.2 versijoje Studentas klasėje.
 
