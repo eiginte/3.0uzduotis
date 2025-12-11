@@ -4,6 +4,43 @@ SSD: 512 GB Lexar NM620 PCIe NVMe SSD
 
 -------------2.0 versija:----------------
 
+Programos naudojimosi instrukcija:
+Programa leidžia kurti studentų grupes, pridėti studentus, rikiuoti juos pagal vardą arba pavardę ir saugoti į failus.
+
+Failai:
+main.cpp – pagrindinis programos failas
+Studentas.h/cpp – studento klasė su vardu, pavarde, pažymiais ir egzamino balu
+StudentuGrupe.h/cpp – studentų grupės klasė su funkcijomis pridėjimui, skaitymui, generavimui ir rikiavimui
+Zmogus.h – bendroji klasė, iš kurios paveldi Studentas
+
+Kompiliavimas:
+Naudojant CMakeLists.txt:
+Sukurkite build aplanką:
+mkdir build
+cd build
+
+Sugeneruokite build failus:
+cmake ..
+
+Sukompiliuokite programą:
+cmake --build . --config Release
+
+Paleiskite vykdomąjį failą:
+.\Release\studentai.exe
+
+Tuomet:
+Galime pasirinkti strategiją, pagal kurią bus skirstomi studentai:
+<img width="1226" height="169" alt="image" src="https://github.com/user-attachments/assets/c9db59fc-1f8f-43fc-841e-7d1553eac757" />
+Tuomet pasirenkame norimą konteinerį:
+<img width="1189" height="124" alt="image" src="https://github.com/user-attachments/assets/82451e3c-0ce6-4deb-81e5-80b5785838b2" />
+Tuomet pasirenkame veiksmą (pvz. nuskaityti iš failo):
+<img width="603" height="779" alt="image" src="https://github.com/user-attachments/assets/92c113a7-1da5-47c5-9b6d-76ca913c61dc" />
+tada renkames, pagal ką norime skirstyti, ir ar norime surikiuoti studentus pagal pavardę:
+<img width="816" height="862" alt="image" src="https://github.com/user-attachments/assets/a3481b66-b5ad-4436-bc0f-d4f690474318" />
+Tuomet išrūšiuoti studentai yra įrašomi į failus vargsiukai.txt bei kietiakai.txt
+
+
+
 Testavimas atliktas su Google Test biblioteka
 Testai aprašomi daile test.cpp. Naudojamos dvi testų grupės (test suites):
 "StudentuGrupeTests" testuoja "StudentuGrupe" struktūros f-jos tikrina studentų pridėjimą į grupę ("prideti_studenta"), ar studentas tinkamai įrašomas į vektorių ir ar jo vardas bei pavardė teisingai saugomi.
