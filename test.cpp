@@ -58,10 +58,9 @@ int main(int argc, char **argv) {
     std::cout.rdbuf(nullptr);
 
     int result = RUN_ALL_TESTS();
-
-    // Gràþinam cout atgal (nebûtina, bet tvarkingiau)
     std::cout.rdbuf(oldCout);
 
     return result;
 }
+
 
