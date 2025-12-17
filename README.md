@@ -3,6 +3,7 @@ RAM: 16 GB DDR4-2400 MHz (2 × 8 GB, Hynix)
 SSD: 512 GB Lexar NM620 PCIe NVMe SSD
 
 -------------3.0 versija-----------------
+
 Šioje versijoje parengtas diegimo failas StudentuRusiavimas_Setup.exe
 
 -------------2.0 versija:----------------
