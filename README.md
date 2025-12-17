@@ -2,6 +2,9 @@ CPU: Intel Core i5-10210U, 10-oji karta, 4 branduoliai / 8 gijos, 1.6 GHz bazini
 RAM: 16 GB DDR4-2400 MHz (2 × 8 GB, Hynix)
 SSD: 512 GB Lexar NM620 PCIe NVMe SSD
 
+-------------3.0 versija-----------------
+Šioje versijoje parengtas diegimo failas StudentuRusiavimas_Setup.exe
+
 -------------2.0 versija:----------------
 
 Programos naudojimosi instrukcija:
