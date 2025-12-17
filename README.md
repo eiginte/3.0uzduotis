@@ -5,6 +5,15 @@ SSD: 512 GB Lexar NM620 PCIe NVMe SSD
 -------------3.0 versija-----------------
 
 Šioje versijoje parengtas diegimo failas StudentuRusiavimas_Setup.exe
+Atsisiųskite šį failą, tuomet paleiskite jį:
+<img width="800" height="614" alt="image" src="https://github.com/user-attachments/assets/9b7989e0-8c4f-4b29-8f80-3bf24aacd894" />
+Tuomet spauskite Next, ir Install
+Jūsų Desktop'e turėtų susikurti programa pavadinimu "StudentuRusiavimas", ją taip pat galite rasti ir šiuo adresu: C:\Program Files\VU\Eiginte-Smigelskyte
+Paleiskite ją administratoriaus teisėmis ir pasirinkite nuorimus parametrus (apačioje, prie 2.0 versijos yra instrukcija kaip naudotis programa)
+Jei norite nuskaityti iš failo galite rinktis šiuos: 5_stud.txt arba 1000_stud.txt (jie automatiškai buvo įdiegti su programa).
+Tuomet C:\Program Files\VU\Eiginte-Smigelskyte aplanke rasite suskirstytus studentus, t.y. vargsiukai.txt bei kietiakai.txt failus.
+Norėdami ištrinti programa, atsidarykite tą patį aplanką (C:\Program Files\VU\Eiginte-Smigelskyte) ir paspauskite "unins000.exe", tuomet visi prieš tai įdiegti failai bus ištrinti iš jūsų kompiuterio.
+
 
 -------------2.0 versija:----------------
 
